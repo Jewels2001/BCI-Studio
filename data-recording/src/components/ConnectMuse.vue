@@ -8,6 +8,7 @@ export default {
         return {
             connected: false,
             recording: false,
+            recorded: false,
             samples: 0,
             client: null,
             ch0: {
@@ -71,6 +72,7 @@ export default {
             if(this.client != null) {
                 if(this.recording) {
                     this.recording = false
+                    this.recorded = true
                 }
                 else {
                     this.ch0.hist = [[]]
@@ -89,16 +91,16 @@ export default {
         async exportRecording(event) {
             let histObj = {
                 ch0: {
-                    hist: this.ch0.hist
+                    hist: this.ch0.hist.shift()
                 },
                 ch1: {
-                    hist: this.ch1.hist
+                    hist: this.ch1.hist.shift()
                 },
                 ch2: {
-                    hist: this.ch2.hist
+                    hist: this.ch2.hist.shift()
                 },
                 ch3: {
-                    hist: this.ch3.hist
+                    hist: this.ch3.hist.shift()
                 },
                 samples: this.samples
             }
@@ -121,8 +123,19 @@ export default {
             fetch("http://localhost:8080", {
                 method: "POST",
                 headers: {'Content-Type': 'application/json'}
-            }).then(res => {
-                console.log("Request complete! response:", res);
+            }).then(res => res.json())
+            .then(data => {
+                console.log("Request complete! response:", data);
+            });
+        },
+
+        async testFiles(event) {
+            fetch("http://localhost:8080/files", {
+                method: "GET",
+                headers: {'Content-Type': 'application/json'}
+            }).then(res => res.json())
+            .then(data => {
+                console.log("Request complete! response:", data);
             });
         }
     },
@@ -135,8 +148,9 @@ export default {
         <h3>{{this.connected ? "Connected!" : "Not Connected :("}}</h3>
 	    <button @click="connect">Connect Muse</button>
         <button v-if="this.connected" @click="toggleRecord">{{this.recording ? "Stop Recording" : "Record"}}</button>
-        <button v-if="this.connected" :disabled="this.recording" @click="exportRecording">Export Recording</button>
+        <button v-if="this.connected && this.recorded" :disabled="this.recording" @click="exportRecording">Export Recording</button>
         <button @click="testREST">Test API Connection</button>
+        <button @click="testFiles">Test GET Filenames</button>
     </div>
     <div class="data">
         <DataBandDisplay :ch=this.ch0 name='ch0'></DataBandDisplay>
@@ -156,6 +170,7 @@ export default {
 .buttons {
     display: flex;
     flex-direction: column;
+    padding: 10px;
 }
 
 </style>

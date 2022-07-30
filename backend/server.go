@@ -1,12 +1,12 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
 	"time"
 
+	"backend/server/routes"
 	"backend/server/types"
 	"backend/server/util"
 
@@ -19,28 +19,17 @@ const (
 )
 
 func greet(w http.ResponseWriter, r *http.Request) {
-	log.Println("Endpoint hit: greet")
-	util.RespondWithJSON(w, 200, fmt.Sprintf("Hello World! %s", time.Now()))
-}
-
-func uploadCSV(w http.ResponseWriter, r *http.Request) {
-	log.Println("Endpoint hit: uploadCSV")
-	var H types.History
-	err := json.NewDecoder(r.Body).Decode(&H)
-	if err != nil {
-		log.Println(err.Error())
-		util.RespondWithError(w, http.StatusBadRequest, "invalid fields")
-		return
-	}
-	util.DisplayH(H)
-	util.RespondWithJSON(w, http.StatusAccepted, fmt.Sprintf("Data Recieved %s", time.Now()))
+	log.Println("Endpoint hit: /")
+	util.RespondWithJSON(w, http.StatusAccepted, &types.Message{Message: fmt.Sprintf("Hello World! %s", time.Now())})
 }
 
 func main() {
 	// Setup routes
 	r := mux.NewRouter()
 	r.HandleFunc("/", greet)
-	r.HandleFunc("/upload", uploadCSV).Methods("POST")
+	r.HandleFunc("/upload", routes.Upload).Methods("POST")
+	r.HandleFunc("/files", routes.GetFiles).Methods("GET")
+	r.HandleFunc("/download/{filename}", routes.Download).Methods("GET")
 
 	log.Printf("Now serving on %d...\n", PORT)
 

@@ -26,7 +26,7 @@ func RespondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
 	w.Write(response)
 }
 
-func DisplayH(H types.History) {
+func DisplayRecording(H types.Recording) {
 	fmt.Println("HISTORY=======================================")
 	for i := 0; i < H.Samples; i++ {
 		fmt.Println("Sample", i)
