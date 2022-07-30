@@ -1,15 +1,15 @@
 <template>
   <img alt="logo" src="./assets/minion.jpg">
-  <HelloWorld msg="BCI Wizards: Brain Musical Visualizer!!!!"/>
+  <HomePage msg="BCI Wizards: Brain Musical Visualizer!!!!"/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import HomePage from './components/HomePage.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HomePage
   }
 }
 </script>
