@@ -3,13 +3,28 @@ defineProps({
   ch: {
     type: Object,
     required: true
+  },
+  name: {
+    type: String,
+    required: true
   }
 })
 </script>
 
 <template>
-    <div v-for="(label, i) in ch.labels">
-        <h3>{{label}}</h3>
-        <p>{{ch.datasets[0].data[i]}}</p>
+    <div class="band">
+      <h1>{{name}}</h1>
+      <div v-for="(label, i) in ch.labels">
+          <h2>{{label}}</h2>
+          <p>{{ch.data[i]}}</p>
+      </div>
     </div>
 </template>
+
+<style>
+.band {
+  display: flex;
+  flex-direction: column;
+  padding: 50px
+}
+</style>
