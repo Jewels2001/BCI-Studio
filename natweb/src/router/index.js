@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import RecordView from '../views/RecordView.vue'
 
 const routes = [
   {
@@ -7,11 +8,11 @@ const routes = [
     name: 'home',
     component: HomeView
   },
-  // {
-  //   path: '/about',
-  //   name: 'play',
-  //   component: PlayVisual
-  // }
+  {
+    path: '/recording',
+    name: 'record',
+    component: RecordView
+  }
 ]
 
 const router = createRouter({
