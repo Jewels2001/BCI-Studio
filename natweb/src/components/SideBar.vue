@@ -40,7 +40,7 @@ export default {
     right: 0px;
     top: 0px;
     /* align-items: center; */
-    opacity: 50%;
+    /* opacity: 50%; */
 }
 
 </style>

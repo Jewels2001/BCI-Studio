@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import RecordView from '../views/RecordView.vue'
+import PlayView from '../views/PlayView.vue'
 
 const routes = [
   {
@@ -12,6 +13,11 @@ const routes = [
     path: '/recording',
     name: 'record',
     component: RecordView
+  },
+  {
+    path: '/play',
+    name: 'play',
+    component: PlayView
   }
 ]
 
