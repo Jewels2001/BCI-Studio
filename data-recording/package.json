@@ -9,10 +9,11 @@
   "dependencies": {
     "@neurosity/pipes": "^4.7.0",
     "muse-js": "^3.3.0",
+    "tone": "^14.7.77",
     "vue": "^3.2.37"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.0.1",
-    "vite": "^3.0.1"
+    "vite": "^3.0.4"
   }
 }
