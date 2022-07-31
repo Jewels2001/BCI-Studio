@@ -15,26 +15,9 @@ const KEYS =   [[0, 2, 4, 5, 7, 9, 11],     // C
                 [10, 0, 2, 3, 5, 7, 9],     // Bb
                 [5, 7, 9, 10, 0, 2, 4]]     // F
 
-const TEMPO = 80
+const TEMPO = 120
 const SUBDIVISION = 2
 const WAIT_TIME = 1.0 / ((TEMPO / 60) * SUBDIVISION)
-
-// Helper functions
-function rand(max) {
-    return Math.floor(Math.random() * max)
-}
-
-function chance(pct) {
-    return rand(100) <= pct
-}
-
-const sleep = s => new Promise(r => setTimeout(r, s * 1000));
-
-function numToNote(num) {
-    if(num % 12 == 0) {
-        
-    }
-}
 
 export default {
     data() {
@@ -46,7 +29,7 @@ export default {
             key: [],
             key_change_chance: 0,
             melody_note: 0,
-            melody_note_chance: 25
+            melody_note_chance: 45
         }
     },
     methods: {
@@ -80,27 +63,28 @@ export default {
         genKey() {
             let i = 0
             if(this.cur_key == -1) {
-                i = rand(12)
+                i = this.rand(12)
             }
             else {
-                i = ((i + (rand(5)-3)) + 12) % 12
+                i = ((i + (this.rand(5)-3)) + 12) % 12
             }
             console.log("KEY", i)
-            return KEYS[i], i
+            this.key = KEYS[i]
+            this.cur_key = i
         },
 
         genChord(key) {
-            let i = rand(7)
-            let root = key[i]
-            let third = key[(i+2) % 7]
-            let fifth = key[(i+4) % 7]
+            let i = this.rand(7)
+            let root = this.key[i]
+            let third = this.key[(i+2) % 7]
+            let fifth = this.key[(i+4) % 7]
             
             return [root, third, fifth]
         },
 
         genMelodyNote(key, chord) {
-            let offset = rand(4) * 2
-            let note = key[(key.index(chord[0]) + offset) % 7] + 72
+            let offset = this.rand(4) * 2
+            let note = key[(key.indexOf(chord[0]) + offset) % 7] + 72
             if(note > 84) {
                 note -= 12
             }
@@ -108,8 +92,8 @@ export default {
         },
 
         genVoicing(chord) {
-            let voicing = chord
-            for(let i = 0; i < length(voicing); i++) {
+            let voicing = chord.slice()
+            for(let i = 0; i < voicing.length; i++) {
                 voicing[i] += 48
                 if(voicing[i] > 60) {
                     voicing[i] -= 12
@@ -120,16 +104,64 @@ export default {
             return voicing
         },
 
+        // Helper functions
+        rand(max) {
+            return Math.floor(Math.random() * max)
+        },
+
+        chance(pct) {
+            return this.rand(100) <= pct
+        },
+
+        sleep(s) {
+            return new Promise(resolve => setTimeout(resolve, s*1000));
+        },
+
+        numToNote(num) {
+            let note = ""
+            if(num % 12 == 0) {
+                note = "C"
+            } else if(num % 12 == 1) {
+                note = 'C#'
+            } else if(num % 12 == 2) {
+                note = 'D'
+            } else if(num % 12 == 3) {
+                note = 'D#'
+            } else if(num % 12 == 4) {
+                note = 'E'
+            } else if(num % 12 == 5) {
+                note = 'F'
+            } else if(num % 12 == 6) {
+                note = 'F#'
+            } else if(num % 12 == 7) {
+                note = 'G'
+            } else if(num % 12 == 8) {
+                note = 'G#'
+            } else if(num % 12 == 9) {
+                note = 'A'
+            } else if(num % 12 == 10) {
+                note = 'A#'
+            } else if(num % 12 == 11) {
+                note = 'B'
+            }
+
+            let octave = Math.floor(num / 12) - 1
+
+            return note + octave
+        },
+
         async generateMusic() {
             const chordSynth = new Tone.PolySynth().toDestination();
             const bassSynth = new Tone.PolySynth().toDestination();
             const melodySynth = new Tone.PolySynth().toDestination();
+            this.genKey()
+            console.log("Key", this.key)
             while(this.playing) {
                 // START OF BAR
 
                 // Try to change key
-                if(chance(this.key_change_chance)) {
-                    this.key, this.cur_key = genKey()
+                if(this.chance(this.key_change_chance)) {
+                    this.genKey()
                     this.key_change_chance = 0
                 }
                 else {
@@ -137,51 +169,42 @@ export default {
                 }
                 
                 // Generate current chord
-                this.chord = genChord(this.key)
-                this.voicing = genVoicing(this.chord)
-                // print([x % 12 for x in voicing], voicing, chord)
+                this.chord = this.genChord(this.key)
+                console.log("Chord", this.chord)
+                this.voicing = this.genVoicing(this.chord)
+                console.log("Voicing", this.voicing)
 
                 let bass_note = this.chord[0] + 36
-                let bass_vel = 20 + rand(20)
-                // midiout.send_message([144, bass_note, bass_vel])
-                bassSynth.triggerAttackRelease(numToNote(bass_note), "8n")
+                console.log("Bass", bass_note)
+                // let bass_vel = 20 + this.rand(20)
+                bassSynth.triggerAttackRelease(this.numToNote(bass_note), "8n")
 
                 // Play chord
-                // midiout.send_message([144, voicing[0], 40 + rand(10)])
-                // midiout.send_message([144, voicing[1], 40 + rand(10)])
-                // midiout.send_message([144, voicing[2], 40 + rand(10)])
-                chordSynth.triggerAttackRelease([numToNote(this.voicing[0]), numToNote(this.voicing[1]), numToNote(this.voicing[2])], "8n")
-
+                console.log("Voicing", [this.numToNote(this.voicing[0]), this.numToNote(this.voicing[1]), this.numToNote(this.voicing[2])])
+                chordSynth.triggerAttackRelease([this.numToNote(this.voicing[0]), this.numToNote(this.voicing[1]), this.numToNote(this.voicing[2])], "8n")
+                
                 for(let beat = 0; beat < 4; beat++) {
                     for(let sub = 0; sub < SUBDIVISION; sub++) {
+                        if(!this.playing) {
+                            return
+                        }
 
                         // Try to play melody note
-                        if(this.melody_note == 0 || chance(this.melody_note_chance)) {
-                            // midiout.send_message([128, melody_note, 0])
-                            this.melody_note = genMelodyNote(this.key, this.chord)
-                            // print("MELODY", melody_note % 12)
-                            // midiout.send_message([144, melody_note, 50 + rand(20)])
-                            melodySynth.triggerAttackRelease(numToNote(this.melody_note))
+                        if(this.melody_note == 0 || this.chance(this.melody_note_chance)) {
+                            this.melody_note = this.genMelodyNote(this.key, this.chord)
+                            console.log("Melody", this.melody_note)
+                            melodySynth.triggerAttackRelease(this.numToNote(this.melody_note), "8n")
                         }
 
                         // Change chance of next melody note occuring
-                        this.melody_note_chance + (rand(40)-20)
-                        this.melody_note_chance = max(this.melody_note_chance, 0)
-                        this.melody_note_chance = min(this.melody_note_chance, 100)
+                        this.melody_note_chance + (this.rand(40)-20)
+                        this.melody_note_chance = Math.max(this.melody_note_chance, 0)
+                        this.melody_note_chance = Math.min(this.melody_note_chance, 100)
 
                         // Wait for next tick
-                        // time.sleep(WAIT_TIME)
-                        await sleep(WAIT_TIME)
-                        // midiout.send_message([176, 64, 127])
+                        await this.sleep(WAIT_TIME)
                     }
                 }
-
-                // Stop playing chord
-                // midiout.send_message([128, voicing[0], 0])
-                // midiout.send_message([128, voicing[1], 0])
-                // midiout.send_message([128, voicing[2], 0])
-                // midiout.send_message([128, bass_note, 0])
-                // midiout.send_message([176, 64, 0])
             }
         }
     },
