@@ -11,6 +11,8 @@ export default {
             recorded: false,
             samples: 0,
             client: null,
+            files: [],
+            selectedFile: null,
             ch0: {
                 labels: ["Delta", "Theta", "Alpha", "Beta", "Gamma"],
                 data: [0, 0, 0, 0, 0],
@@ -91,16 +93,16 @@ export default {
         async exportRecording(event) {
             let histObj = {
                 ch0: {
-                    hist: this.ch0.hist.shift()
+                    hist: this.ch0.hist
                 },
                 ch1: {
-                    hist: this.ch1.hist.shift()
+                    hist: this.ch1.hist
                 },
                 ch2: {
-                    hist: this.ch2.hist.shift()
+                    hist: this.ch2.hist
                 },
                 ch3: {
-                    hist: this.ch3.hist.shift()
+                    hist: this.ch3.hist
                 },
                 samples: this.samples
             }
@@ -111,6 +113,7 @@ export default {
                 body: JSON.stringify(histObj)
             }).then(res => {
                 console.log("Request complete! response:", res);
+                this.getFiles()
             });
 
             // console.log("CH0", this.ch0.hist)
@@ -130,7 +133,26 @@ export default {
         },
 
         async testFiles(event) {
+            this.getFiles()
+            console.log("Current files:", this.files)
+        },
+
+        async getFiles() {
             fetch("http://localhost:8080/files", {
+                method: "GET",
+                headers: {'Content-Type': 'application/json'}
+            }).then(res => res.json())
+            .then(data => {
+                console.log("Request complete! response:", data);
+                this.files = data.files
+            });
+        },
+
+        async getFileFromName(filename) {
+            console.log("Requesting file", filename)
+            fetch("http://localhost:8080/download?" + new URLSearchParams({
+                filename: this.selectedFile,
+            }),{
                 method: "GET",
                 headers: {'Content-Type': 'application/json'}
             }).then(res => res.json())
@@ -139,7 +161,10 @@ export default {
             });
         }
     },
-    components: { DataBandDisplay }
+    components: { DataBandDisplay },
+    beforeMount() {
+        this.getFiles()
+    }
 }
 </script>
 
@@ -151,6 +176,14 @@ export default {
         <button v-if="this.connected && this.recorded" :disabled="this.recording" @click="exportRecording">Export Recording</button>
         <button @click="testREST">Test API Connection</button>
         <button @click="testFiles">Test GET Filenames</button>
+        <div id="dropdown">
+            <select v-model="this.selectedFile">
+                <option disabled value=null>Please Select</option>
+                <option v-for="file in this.files" :value="file">{{file}}</option>
+            </select>
+            <button :disabled="this.selectedFile == null" @click="getFileFromName(this.selectedFile)">Select</button>
+        </div>
+        <span style="padding-left:5%">Your Choice is: {{this.selectedFile}}</span>
     </div>
     <div class="data">
         <DataBandDisplay :ch=this.ch0 name='ch0'></DataBandDisplay>

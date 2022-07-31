@@ -3,12 +3,13 @@ package routes
 import (
 	"backend/server/types"
 	"backend/server/util"
+	"encoding/json"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
 	"path/filepath"
-
-	"github.com/gorilla/mux"
+	"strings"
 )
 
 func GetFiles(w http.ResponseWriter, r *http.Request) {
@@ -21,6 +22,8 @@ func GetFiles(w http.ResponseWriter, r *http.Request) {
 		}
 
 		if !info.IsDir() && filepath.Ext(path) == ".json" {
+			path = strings.TrimPrefix(path, "data/")
+			path = strings.TrimSuffix(path, ".json")
 			FD.Files = append(FD.Files, path)
 		}
 
@@ -36,8 +39,26 @@ func GetFiles(w http.ResponseWriter, r *http.Request) {
 }
 
 func Download(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-	filename := vars["filename"]
-	log.Println("Endpoint hit: /download/" + filename)
+	filename := r.URL.Query().Get("filename")
+	log.Println("Endpoint hit: /download?filename=" + filename)
 
+	file, err := os.Open("./data/" + filename + ".json")
+	if err != nil {
+		log.Println(err.Error())
+		util.RespondWithError(w, http.StatusBadRequest, "file not found")
+		return
+	}
+
+	var R types.Recording
+	bytes, err := ioutil.ReadAll(file)
+	if err != nil {
+		log.Println(err.Error())
+		util.RespondWithError(w, http.StatusInternalServerError, err.Error())
+	}
+	if err = json.Unmarshal(bytes, &R); err != nil {
+		log.Println(err.Error())
+		util.RespondWithError(w, http.StatusInternalServerError, err.Error())
+	}
+
+	util.RespondWithJSON(w, http.StatusAccepted, R)
 }

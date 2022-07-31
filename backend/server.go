@@ -29,7 +29,7 @@ func main() {
 	r.HandleFunc("/", greet)
 	r.HandleFunc("/upload", routes.Upload).Methods("POST")
 	r.HandleFunc("/files", routes.GetFiles).Methods("GET")
-	r.HandleFunc("/download/{filename}", routes.Download).Methods("GET")
+	r.HandleFunc("/download", routes.Download).Methods("GET")
 
 	log.Printf("Now serving on %d...\n", PORT)
 
