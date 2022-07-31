@@ -1,9 +1,11 @@
 <script setup>
 import ConnectMuse from './components/ConnectMuse.vue'
+import MusicGen from './components/MusicGen.vue';
 </script>
 
 <template>
   <ConnectMuse></ConnectMuse>
+  <MusicGen></MusicGen>
 </template>
 
 <style scoped>
