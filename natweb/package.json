@@ -11,6 +11,7 @@
     "@vueform/slider": "^2.1.2",
     "core-js": "^3.8.3",
     "vue": "^3.2.13",
+    "vue-color": "^2.8.1",
     "vue-color-kit": "^1.0.5",
     "vue-router": "^4.0.3",
     "yarn": "^1.22.19"

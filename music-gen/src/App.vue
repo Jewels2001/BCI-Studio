@@ -1,5 +1,5 @@
 <script setup>
-import MusicGen from './components/MusicGen.vue';
+import Music from './components/Music.vue';
 </script>
 
 <template>
@@ -8,7 +8,7 @@ import MusicGen from './components/MusicGen.vue';
   </header>
 
   <main>
-    <MusicGen/>
+    <Music/>
   </main>
 </template>
 

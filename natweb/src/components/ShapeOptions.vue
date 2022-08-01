@@ -2,9 +2,9 @@
     <div class="shapes">
     <div id ="square">
         <label class="SquareSwitch">
-        <input type="checkbox">
-        <span class="slider round"></span>
-    </label>
+          <input type="checkbox">
+          <span class="slider round"></span>
+        </label>
     </div>
     
     <div id="circle">

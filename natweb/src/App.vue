@@ -54,4 +54,5 @@ nav li:active {
 }
 
 @import url('https://fonts.google.com/specimen/Bodoni+Moda');
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100&display=swap');
 </style>
