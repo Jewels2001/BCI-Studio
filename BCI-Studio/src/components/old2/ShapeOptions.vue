@@ -2,9 +2,9 @@
     <div class="shapes">
     <div id ="square">
         <label class="SquareSwitch">
-          <input type="checkbox">
-          <span class="slider round"></span>
-        </label>
+        <input type="checkbox">
+        <span class="slider round"></span>
+    </label>
     </div>
     
     <div id="circle">
@@ -30,14 +30,14 @@ export default {
 #square {
   width: 100px;
   height: 100px;
-  background: #e8a87c;
+  background: white;
   float: right;
   margin: 25px;
 }
 #circle {
   width: 100px;
   height: 100px;
-  background: #e8a87c;
+  background: white;
   border-radius: 50%;
   float: right;
   margin: 25px 20px;
@@ -100,11 +100,11 @@ export default {
 }
 
 input:checked + .slider {
-  background-color: #c38d9e;
+  background-color: #2196F3;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #c38d9e;
+  box-shadow: 0 0 1px #2196F3;
 }
 
 input:checked + .slider:before {

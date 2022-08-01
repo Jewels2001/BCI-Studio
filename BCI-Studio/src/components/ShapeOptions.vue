@@ -1,32 +1,27 @@
 <template>
     <div class="shapes">
-    <SlideBar/>
     <div id ="square">
         <label class="SquareSwitch">
         <input type="checkbox">
         <span class="slider round"></span>
     </label>
     </div>
-    
+
     <div id="circle">
         <label class="CircleSwitch">
         <input type="checkbox">
         <span class="slider round"></span>
     </label>
     </div>
-    
+
     </div>
 
 </template>
 
 <script>
-import SlideBar from './SlideBar.vue'
 
 export default {
-    name: 'ShapeOptions',
-     components: {
-        SlideBar
-  }
+    name: 'ShapeOptions'
 }
 </script>
 
@@ -35,14 +30,14 @@ export default {
 #square {
   width: 100px;
   height: 100px;
-  background: white;
+  background: #e8a87c;
   float: right;
   margin: 25px;
 }
 #circle {
   width: 100px;
   height: 100px;
-  background: white;
+  background: #e8a87c;
   border-radius: 50%;
   float: right;
   margin: 25px 20px;
@@ -56,7 +51,7 @@ export default {
     height: 34px;
     margin-top: 115px;
 
-    
+
 }
 .SquareSwitch input {
   opacity: 0;
@@ -70,9 +65,9 @@ export default {
     width: 60px;
     height: 34px;
     margin-top: 116px;
-  
+
 }
-    
+
 .CircleSwitch input {
   opacity: 0;
   width: 0;
@@ -105,11 +100,11 @@ export default {
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: #c38d9e;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px #c38d9e;
 }
 
 input:checked + .slider:before {

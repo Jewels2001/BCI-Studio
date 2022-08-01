@@ -5,21 +5,22 @@
   <span> Size: {{ number }} </span>
   <SlideBar v-model="number" :min="0" :max="99" class="slider" />
   <ShapeOptions/>
+  <ColourPicker/>
   </div>
-  <!-- <div id = "colors"><ColourPicker/></div> -->
+  
 </template>
 
 <script>
 import ShapeOptions from './ShapeOptions.vue'
 import SlideBar from './SlideBar.vue'
-// import ColourPicker from './ColourPicker.vue';
+import ColourPicker from './ColourPicker.vue';
 
 export default {
   name: "SideBar",
   components: {
     ShapeOptions,
     SlideBar,
-    // ColourPicker
+    ColourPicker
 },
   data() {
     return {
@@ -32,27 +33,14 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 #sidebar {
-    background-color: beige;
+    background-color: rgb(0, 0, 0);
     height: 100%;
     width: 300px;
     position: fixed;
     right: 0px;
     top: 0px;
-    border-left: 5px solid #d2b48c;
     /* align-items: center; */
     /* opacity: 50%; */
-}
-h1 {
-  font-weight: lighter;
-  font-family: "Vanitas";
-  font-size: 80px;
-  color: #41b3a3;
-  margin: 10px;
-}
-span {
-  font-family: "Bodoni Moda";
-  font-size: 30px;
-  color: #d2b48c
 }
 
 </style>

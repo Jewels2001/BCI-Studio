@@ -41,4 +41,18 @@ nav li:active {
   cursor: pointer;
 }
 
+@font-face {
+  font-family: "Vanitas";
+  src: local("Vanitas"),
+  url(./fonts/VanitasVanitatum.ttf)format("truetype");
+}
+
+@font-face {
+  font-family: "HustleBright";
+  src: local("HustleBright"),
+  url(./fonts/HustleBright.ttf)format("truetype");
+}
+
+@import url('https://fonts.google.com/specimen/Bodoni+Moda');
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100&display=swap');
 </style>

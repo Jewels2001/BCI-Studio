@@ -1,12 +1,14 @@
 <template>
+  
+  <!-- <HomePage msg="BCI Wizards: Brain Musical Visualizer!!!!"/> -->
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <h1>Welcome to BCI Studio
+    </h1>
+    <img alt="logo" src="../assets/minion.jpg"/>
     <p>
       This app uses your very own brain data to create SICK visuals and music. <br>
     </p>
-    <button v-on:click="alert('hi!')" >
-    Click here to start
-    </button>
+    <button @click="$router.push('recording')"> Click here to start </button>
   </div>
 </template>
 
@@ -21,26 +23,73 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+h1 {
+  color: #e27d60;
+  font-family: "Vanitas";
+  font-weight: lighter;
+  font-size: 200px;
+  margin: 20px;
+  margin-bottom: 10px;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+
+p {
+  color: black;
+  font-family: "Bodoni Moda";
+  font-size: 30px;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+img {
+  height: 400px;
 }
-a {
-  color: #42b983;
-}
+
 button {
-  background-color: #42b983;
+  /* background-color: #42b983;
   border: none;
+  border-radius: 5px;
+  box-shadow: 0 5px #999;
   color: white;
   text-align: center;
   padding: 20px 50px;
-  font-size: 20px;
+  font-size: 20px; */
+  padding: 0.8rem 2.5rem;
+  background: transparent;
+  text-align: center;
+  font-size: 30px;
+  font-family: "Bodoni Moda";
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 1px solid #e27d60;
+  color: rgb(31, 31, 31);
+  font-weight: bold;
+  letter-spacing: 1px;
+  transition: 0.3s linear;
+  position: relative;
 }
+/* button:hover {
+  background-color: #2d7a58;
+}
+button:active {
+  background-color: #2d7a58;
+  box-shadow: 0 3px #666 ;
+  transform: translateY(2px);
+} */
+
+button::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transform: scalex(0);
+  background: #c38d9e;
+  transform-origin: right;
+  transition: transform 200ms ease-in;
+}
+
+button:hover::after {
+  transform: scalex(1);
+  transform-origin: left;
+} 
+        
 </style>
