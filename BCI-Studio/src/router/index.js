@@ -2,6 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import RecordView from '../views/RecordView.vue'
 import PlayView from '../views/PlayView.vue'
+import StudioView from '../views/StudioView.vue'
+import AboutView from '../views/AboutView.vue'
+import ContactView from '../views/ContactView.vue'
 import NotFound from '../views/NotFound.vue'
 
 const routes = [
@@ -19,6 +22,21 @@ const routes = [
     path: '/play',
     name: 'play',
     component: PlayView
+  },
+  {
+    path: '/studio',
+    name: 'studio',
+    component: StudioView
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: AboutView
+  },
+  {
+    path: '/contact',
+    name: 'contact',
+    component: ContactView
   },
   {
     path: '/:pathMatch(.*)',

@@ -1,27 +1,5 @@
 
 <script>
-import HomeView from '../views/HomeView.vue'
-// import AboutView from '../views/AboutView.vue'
-// import StudioView from '../views/StudioView.vue'
-import NotFound from '../views/NotFound.vue'
-//
-// const routes = {
-//   '/': HomeView,
-//   '/about': AboutView,
-//   '/studio': StudioView
-// }
-//
-// export default {
-//   data() {
-//     return {
-//       currentPath: window.location.hash
-//     }
-//   },
-//   computed: {
-//     currentView() {
-//       return routes[this.currentPath.slice(1) || '/'] || NotFound
-//     }
-//   },
 //   mounted() {
 //     // Once we add rounting, can delete all of query selecting to add 'active status'
 //     document.querySelector('a[href="' + this.currentPath + '"]').classList.add('active');
@@ -44,6 +22,7 @@ with it for routing purposes the page does not reload -->
     <router-link to="/">Home</router-link>
     <router-link to="/recording">Record Brain</router-link>
     <router-link to="/play">Make ART</router-link>
+    <router-link to="/studio">STUDIO</router-link>
     </div>
     <div class="top-right">
       <router-link to="/about">About</router-link>
