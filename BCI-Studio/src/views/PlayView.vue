@@ -1,5 +1,9 @@
 <template>
-    <SideBar/>
+    <div class="main">
+    </div>
+    <div class="side">
+      <SideBar/>
+    </div>
 </template>
 
 <script>
@@ -9,8 +13,14 @@ export default {
   name: 'App',
   components: {
     SideBar
-
+  }
 }
-}   
-
 </script>
+
+<style>
+
+.side {
+  height: 100%;
+}
+
+</style>

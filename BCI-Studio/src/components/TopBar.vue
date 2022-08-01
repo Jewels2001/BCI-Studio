@@ -39,20 +39,17 @@ import NotFound from '../views/NotFound.vue'
 <!-- Without # causes the page to reload;
 with it for routing purposes the page does not reload -->
 <template>
-  <!-- <div class="top">
-    <a href="#/"> Home </a> |
-    <a href="#/about"> About </a> |
-    <a href="#/studio"> Studio! </a> |
-    <a href="#/non-existent-path">Broken Link</a>
-  </div>
-  <br>
-  <component :is="currentView" /> -->
   <div class="top">
+    <div>
     <router-link to="/">Home</router-link>
     <router-link to="/recording">Record Brain</router-link>
     <router-link to="/play">Make ART</router-link>
+    </div>
+    <div class="top-right">
+      <router-link to="/about">About</router-link>
+      <router-link to="/contact">Contact</router-link>
+    </div>
   </div>
-  <br>
 </template>
 
 <style>
@@ -60,6 +57,7 @@ with it for routing purposes the page does not reload -->
   background-color: lightblue;
   overflow: hidden;
   display: block;
+  clear: both;
 }
 
 .top.router-link-active {
@@ -74,6 +72,7 @@ with it for routing purposes the page does not reload -->
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
+  font-family: 'HustleBright';
   font-size: 14px;
 }
 
@@ -87,6 +86,11 @@ with it for routing purposes the page does not reload -->
   background-color: #04AA6D;
   color: black;
 }
+
+.top-right {
+  float: right;
+}
+
 
 nav li:hover,
 nav li.active,

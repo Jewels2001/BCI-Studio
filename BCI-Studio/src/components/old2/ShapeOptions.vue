@@ -6,14 +6,14 @@
         <span class="slider round"></span>
     </label>
     </div>
-
+    
     <div id="circle">
         <label class="CircleSwitch">
         <input type="checkbox">
         <span class="slider round"></span>
     </label>
     </div>
-
+    
     </div>
 
 </template>
@@ -30,14 +30,14 @@ export default {
 #square {
   width: 100px;
   height: 100px;
-  background: #e8a87c;
+  background: white;
   float: right;
   margin: 25px;
 }
 #circle {
   width: 100px;
   height: 100px;
-  background: #e8a87c;
+  background: white;
   border-radius: 50%;
   float: right;
   margin: 25px 20px;
@@ -51,7 +51,7 @@ export default {
     height: 34px;
     margin-top: 115px;
 
-
+    
 }
 .SquareSwitch input {
   opacity: 0;
@@ -65,9 +65,9 @@ export default {
     width: 60px;
     height: 34px;
     margin-top: 116px;
-
+  
 }
-
+    
 .CircleSwitch input {
   opacity: 0;
   width: 0;
@@ -100,11 +100,11 @@ export default {
 }
 
 input:checked + .slider {
-  background-color: #c38d9e;
+  background-color: #2196F3;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #c38d9e;
+  box-shadow: 0 0 1px #2196F3;
 }
 
 input:checked + .slider:before {

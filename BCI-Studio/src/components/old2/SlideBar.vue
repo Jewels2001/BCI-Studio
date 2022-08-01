@@ -74,7 +74,7 @@ export default {
 	appearance: none;
 	width: 18px;
 	height: 18px;
-	background: #c38d9e;
+	background: #83b8e9;
 	cursor: pointer;
 	border-radius: 50%;
 }
@@ -82,7 +82,7 @@ export default {
 .slider-component .slidecontainer .slider::-moz-range-thumb {
 	width: 18px;
 	height: 18px;
-	background: #c38d9e;
+	background: #7caee7;
 	cursor: pointer;
 	border-radius: 50%;
 }
