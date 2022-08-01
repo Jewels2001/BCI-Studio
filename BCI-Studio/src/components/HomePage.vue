@@ -1,12 +1,12 @@
 <template>
+  <img alt="logo" src="../assets/minion.jpg">
+  <!-- <HomePage msg="BCI Wizards: Brain Musical Visualizer!!!!"/> -->
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <h1>BCI Wizards: Brain Musical Visualizer!!!!</h1>
     <p>
       This app uses your very own brain data to create SICK visuals and music. <br>
     </p>
-    <button v-on:click="alert('hi!')" >
-    Click here to start
-    </button>
+    <button @click="$router.push('recording')"> Click here to start </button>
   </div>
 </template>
 
@@ -21,16 +21,14 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+h1 {
+  color: black;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+p {
+  color: black;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+body {
+  background-color: rgb(207, 32, 32);
 }
 a {
   color: #42b983;
@@ -38,9 +36,20 @@ a {
 button {
   background-color: #42b983;
   border: none;
+  border-radius: 5px;
+  box-shadow: 0 5px #999;
   color: white;
   text-align: center;
   padding: 20px 50px;
   font-size: 20px;
 }
+button:hover {
+  background-color: #2d7a58;
+}
+button:active {
+  background-color: #2d7a58;
+  box-shadow: 0 3px #666 ;
+  transform: translateY(2px);
+}
+
 </style>

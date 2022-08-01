@@ -1,5 +1,6 @@
 <template>
     <div class="shapes">
+    <SlideBar/>
     <div id ="square">
         <label class="SquareSwitch">
         <input type="checkbox">
@@ -19,9 +20,13 @@
 </template>
 
 <script>
+import SlideBar from './SlideBar.vue'
 
 export default {
-    name: 'ShapeOptions'
+    name: 'ShapeOptions',
+     components: {
+        SlideBar
+  }
 }
 </script>
 
