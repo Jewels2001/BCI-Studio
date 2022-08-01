@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="main">
-      <Viz />
+      <Viz2 />
 
       <!-- <canvas id="test1" class="test">
       </canvas> -->
@@ -15,11 +15,13 @@
 <script>
 import SideBar from '../components/SideBar.vue'
 import Viz from '../components/Viz.vue'
+import Viz2 from '../components/Viz2.vue'
 
 export default {
   name: 'App',
   components: {
     Viz,
+    Viz2,
     SideBar
   }
 }

@@ -1,4 +1,5 @@
 <script>
+import Queue from './util/queue.js'
 
 export default {
     data() {
@@ -6,7 +7,9 @@ export default {
             canvas: null,
             context: null,
             cursor: null,
-            particlesArray: []
+            particlesArray: [],
+            avg_hist: new Queue(),
+            avg_activity: 0
         }
     },
     methods: {
@@ -67,17 +70,62 @@ export default {
 
         anim() {
             window.requestAnimationFrame(this.anim);
+            this.triggerComponents();
+
 
             this.context.fillStyle = "rgba(0,0,0,0.05)";
             this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-            this.particlesArray.forEach((particle) => particle.rotate());
+            this.particlesArray.forEach((particle) => {
+              particle.rotateSpeed = this.avg_activity;
+              particle.rotate()
+            });
         },
-        
+
         cursorUpdate(event) {
           this.cursor.x = event.clientX;
           this.cursor.y = event.clientY;
         },
+        triggerComponents() {
+            if(this.avg_hist.length == 20) {
+                this.avg_hist.pop()
+            }
+            let data = this.$store.getters.getData
+            let sum = 0
+            for(let i=0; i<5; i++) {
+                sum += data.ch0.data[i]
+            }
+            for(let i=0; i<5; i++) {
+                sum += data.ch1.data[i]
+            }
+            for(let i=0; i<5; i++) {
+                sum += data.ch2.data[i]
+            }
+            for(let i=0; i<5; i++) {
+                sum += data.ch3.data[i]
+            }
+            sum /= 20
+            this.avg_hist.push(sum)
+
+            if(this.avg_hist.length == 20) {
+                sum = 0
+                for(let i = this.avg_hist.head; i<this.avg_hist.head+20; i++) {
+                    sum += this.avg_hist.elements[i]
+                }
+                sum /= 20
+                this.avg_activity = sum
+            }
+            // console.log("AVG Activity", this.avg_activity)
+            // console.log("AVG Hist", this.avg_hist.elements)
+        },
+        // updateData() {
+        //   let self = this;
+        //   setInterval(
+        //     function () {
+        //       self.triggerComponents();
+        //     },
+        //   100);
+        // }
     },
     mounted() {
         this.canvas = this.$refs.cw
@@ -90,6 +138,8 @@ export default {
         this.generateParticles(101);
         this.setSize();
         this.anim();
+        // this.updateData();
+
     }
 }
 

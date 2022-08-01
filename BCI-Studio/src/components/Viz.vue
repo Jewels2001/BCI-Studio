@@ -1,4 +1,5 @@
 <script>
+import Queue from './util/queue.js'
 // var canvas = document.getElementById('c');
 // var ctx = canvas.getContext('2d');
 
@@ -10,17 +11,19 @@ var H = 200;
 
 var colors = ['orange', 'blue', 'green', 'red', 'purple'];
 var balls = [];
+// Math.floor(Math.random() * 20) + (-10)
 
-for(let i=0; i<25; i++) {
-  balls[i] = {
-    x: Math.floor(Math.random() * 500),
-    y: Math.floor(Math.random() * 500),
+for(let i=0; i<5; i++) {
+  balls.push({
+    x: Math.floor(Math.random() * 500) + 1,
+    y: Math.floor(Math.random() * 500) + 1,
     vx: Math.floor(Math.random() * 20) + (-10),
     vy: Math.floor(Math.random() * 20) + (-10),
     radius: 5,
     color: colors[Math.floor(Math.random() * 5)],
-  };
+  });
 }
+console.log(balls)
 
 // var ball = {
 //   x: 100,
@@ -59,6 +62,9 @@ export default {
     return {
       c: null,
       intervalId1: '',
+      intervalId2: '',
+      avg_hist: new Queue(),
+      avg_activity: 0
     };
   },
   mounted() {
@@ -94,18 +100,65 @@ export default {
         ball.vx = -ball.vx;
       }
     },
+    triggerComponents() {
+        if(this.avg_hist.length == 20) {
+            this.avg_hist.pop()
+        }
+
+        let data = this.$store.getters.getData
+        let sum = 0
+        for(let i=0; i<5; i++) {
+            sum += data.ch0.data[i]
+        }
+        for(let i=0; i<5; i++) {
+            sum += data.ch1.data[i]
+        }
+        for(let i=0; i<5; i++) {
+            sum += data.ch2.data[i]
+        }
+        for(let i=0; i<5; i++) {
+            sum += data.ch3.data[i]
+        }
+        sum /= 20
+        this.avg_hist.push(sum)
+
+        if(this.avg_hist.length == 20) {
+            sum = 0
+            for(let i = this.avg_hist.head; i<this.avg_hist.head+20; i++) {
+                sum += this.avg_hist.elements[i]
+            }
+            sum /= 20
+            this.avg_activity = sum
+        }
+        // console.log("AVG Activity", this.avg_activity)
+        // console.log("AVG Hist", this.avg_hist.elements)
+    },
 
     startDrawing() {
       console.log('HERE');
       let self = this;
+      this.intervalId2 = setInterval(
+        function () {
+          self.triggerComponents();
+          balls.push({
+            x: Math.floor(Math.random() * 500),
+            y: Math.floor(Math.random() * 500),
+            vx: this.avg_activity,
+            vy: Math.floor(Math.random() * 20) + (-10),
+            radius: 5,
+            color: colors[Math.floor(Math.random() * 5)],
+          });
+          // balls.shift();
+        },
+      5000);
       this.intervalId1 = setInterval(
         function () {
           // console.log(balls.length);
-          for(let i=0; i<balls.length; i++) {
-            self.moveBall(balls[i]);
+          for(let j=0; j<balls.length; j++) {
+            self.moveBall(balls[j]);
           }
-        }
-      , 100);
+        },
+      100);
     },
   },
 };
