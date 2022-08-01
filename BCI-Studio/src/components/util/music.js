@@ -38,3 +38,7 @@ export function numToNote(num) {
 
     return note + octave
 }
+
+export function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}

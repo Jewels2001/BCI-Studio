@@ -35,6 +35,7 @@ export default {
     },
     methods: {
         loop(time, avg_activity) {
+            console.log("AVG", avg_activity)
             if(this.counter % 2 == 0) {
                 if(chance(this.melody_note_chance) || avg_activity > 60) {
                     this.genMelodyNote()

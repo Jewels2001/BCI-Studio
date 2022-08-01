@@ -2,6 +2,7 @@
 import { zipSamples, channelNames, MuseClient } from 'muse-js';
 import { powerByBand, epoch, fft } from "@neurosity/pipes";
 import DataBandDisplay from './DataBandDisplay.vue';
+import { sleep } from '../util/music.js'
 
 export default {
     data() {
@@ -13,6 +14,7 @@ export default {
             client: null,
             files: [],
             selectedFile: null,
+            loadedFile: null,
             ch0: {
                 labels: ["Delta", "Theta", "Alpha", "Beta", "Gamma"],
                 data: [0, 0, 0, 0, 0],
@@ -63,6 +65,7 @@ export default {
                         this.ch1.hist.push(this.ch1.data)
                         this.ch2.hist.push(this.ch2.data)
                         this.ch3.hist.push(this.ch3.data)
+                        console.log("RECORD SAMPLE")
                         this.samples++
                     }
                 });
@@ -160,7 +163,33 @@ export default {
             }).then(res => res.json())
             .then(data => {
                 console.log("Request complete! response:", data);
+                this.loadedFile = data
             });
+        },
+
+        async playFile() {
+            console.log("Playing data from file")
+            let data = this.loadedFile
+            for(let i=0; i<data.samples; i++) {
+                this.$store.commit('updateData', {
+                    ch0: {
+                        data: data.ch0.hist[i]
+                    },
+                    ch1: {
+                        data: data.ch1.hist[i]
+                    },
+                    ch2: {
+                        data: data.ch2.hist[i]
+                    },
+                    ch3: {
+                        data: data.ch3.hist[i]
+                    }
+                })
+                console.log("EMIT SAMPLE")
+                await sleep(356)
+            }
+            console.log("Completed playing data from file")
+            this.$store.commit('resetData')
         }
     },
     components: { DataBandDisplay },
@@ -183,7 +212,8 @@ export default {
                 <option disabled value=null>Please Select</option>
                 <option v-for="file in this.files" :value="file">{{file}}</option>
             </select>
-            <button :disabled="this.selectedFile == null" @click="getFileFromName(this.selectedFile)">Select</button>
+            <button :disabled="this.selectedFile == null" @click="this.getFileFromName(this.selectedFile)">Load</button>
+            <button :disabled="this.loadedFile == null" @click="this.playFile">Play</button>
         </div>
         <span style="padding-left:5%">Your Choice is: {{this.selectedFile}}</span>
     </div>
