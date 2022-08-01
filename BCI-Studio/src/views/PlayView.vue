@@ -9,7 +9,7 @@
 
 <script>
 import SideBar from '../components/SideBar.vue'
-import Viz.vue from '../components/Viz.vue'
+import Viz from '../components/Viz.vue'
 
 export default {
   name: 'App',
