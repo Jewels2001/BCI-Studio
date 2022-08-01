@@ -11,6 +11,11 @@
 //     })
 //   }
 // }
+import ConnectMuse from './muse/ConnectMuse.vue'
+
+export default {
+  components: { ConnectMuse }
+}
 
 </script>
 
@@ -23,6 +28,9 @@ with it for routing purposes the page does not reload -->
     <router-link to="/recording">Record Brain</router-link>
     <router-link to="/play">Make ART</router-link>
     <router-link to="/studio">STUDIO</router-link>
+    </div>
+    <div class="connection">
+      <ConnectMuse/>
     </div>
     <div class="top-right">
       <router-link to="/about">About</router-link>

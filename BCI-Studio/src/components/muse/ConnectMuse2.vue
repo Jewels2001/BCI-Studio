@@ -201,29 +201,40 @@ export default {
 
 <template>
     <div class="buttons">
-        <span>
-            <h3>{{this.connected ? "Connected!" : "Not Connected :("}}</h3>
-            <button @click="connect">Connect Muse</button>
-            <button v-if="this.connected" @click="toggleRecord">{{this.recording ? "Stop Recording" : "Record"}}</button>
-            <button v-if="this.connected && this.recorded" :disabled="this.recording" @click="exportRecording">Export Recording</button>
-            <button @click="testREST">Test API Connection</button>
-            <button @click="testFiles">Test GET Filenames</button>
-            <div id="dropdown">
-                <select v-model="this.selectedFile">
-                    <option disabled value=null>Please Select</option>
-                    <option v-for="file in this.files" :value="file">{{file}}</option>
-                </select>
-                <button :disabled="this.selectedFile == null" @click="this.getFileFromName(this.selectedFile)">Load</button>
-                <button :disabled="this.loadedFile == null" @click="this.playFile">Play</button>
-            </div>
-        </span>
+        <h3>{{this.connected ? "Connected!" : "Not Connected :("}}</h3>
+	    <button @click="connect">Connect Muse</button>
+        <button v-if="this.connected" @click="toggleRecord">{{this.recording ? "Stop Recording" : "Record"}}</button>
+        <button v-if="this.connected && this.recorded" :disabled="this.recording" @click="exportRecording">Export Recording</button>
+        <button @click="testREST">Test API Connection</button>
+        <button @click="testFiles">Test GET Filenames</button>
+        <div id="dropdown">
+            <select v-model="this.selectedFile">
+                <option disabled value=null>Please Select</option>
+                <option v-for="file in this.files" :value="file">{{file}}</option>
+            </select>
+            <button :disabled="this.selectedFile == null" @click="this.getFileFromName(this.selectedFile)">Load</button>
+            <button :disabled="this.loadedFile == null" @click="this.playFile">Play</button>
+        </div>
+        <span style="padding-left:5%">Your Choice is: {{this.selectedFile}}</span>
+    </div>
+    <div class="data">
+        <DataBandDisplay :ch=this.ch0 name='ch0'></DataBandDisplay>
+        <DataBandDisplay :ch=this.ch1 name='ch1'></DataBandDisplay>
+        <DataBandDisplay :ch=this.ch2 name='ch2'></DataBandDisplay>
+        <DataBandDisplay :ch=this.ch3 name='ch3'></DataBandDisplay>
     </div>
 </template>
 
 <style>
 
+.data {
+    display: flex;
+    align-content: space-between;
+}
+
 .buttons {
-    display: inline;
+    display: flex;
+    flex-direction: column;
     padding: 10px;
 }
 
