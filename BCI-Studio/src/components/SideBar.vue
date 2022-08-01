@@ -13,6 +13,9 @@
       <BrainPicker :options="opts"/>
 
     </div>
+    <div>
+      <Music/>
+    </div>
   </div>
 
 </template>
@@ -22,6 +25,7 @@ import ShapeOptions from './ShapeOptions.vue'
 import SlideBar from './SlideBar.vue'
 import ColourPicker from './ColourPicker.vue';
 import BrainPicker from './BrainPicker.vue';
+import Music from './music/Music.vue'
 
 export default {
   name: "SideBar",
@@ -30,6 +34,7 @@ export default {
     SlideBar,
     ColourPicker,
     BrainPicker,
+    Music,
 },
   data() {
     return {
