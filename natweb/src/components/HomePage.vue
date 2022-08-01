@@ -1,15 +1,14 @@
 <template>
-  
   <!-- <HomePage msg="BCI Wizards: Brain Musical Visualizer!!!!"/> -->
-  <div class="hello">
-    <h1>Welcome to BCI Studio
-    </h1>
+  <div class="welcome">
+    <h2>WELCOME TO</h2>
+    <h1>BCI Studio</h1>
     <img alt="logo" src="../assets/minion.jpg"/>
     <p>
       This app uses your very own brain data to create SICK visuals and music. <br>
     </p>
-    <button @click="$router.push('recording')"> Click here to start </button>
   </div>
+  <button @click="$router.push('recording')"> Click here to start </button>
 </template>
 
 <script>
@@ -27,10 +26,21 @@ h1 {
   color: #e27d60;
   font-family: "Vanitas";
   font-weight: lighter;
-  font-size: 200px;
-  margin: 20px;
-  margin-bottom: 10px;
+  font-size: 150px;
+  margin: 0%;
+  letter-spacing: 25px;
 }
+h2 {
+  color: #e27d60;
+  font-family: 'Kumbh Sans', sans-serif;
+  font-stretch: ultra-condensed;
+  font-size: 60px;
+  font-weight: lighter;
+  margin-bottom: 0px;
+  margin-top: 30px;
+  padding: 0;
+  letter-spacing: -5px;
+  }
 
 p {
   color: black;

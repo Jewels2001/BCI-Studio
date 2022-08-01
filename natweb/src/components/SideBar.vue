@@ -5,22 +5,21 @@
   <span> Size: {{ number }} </span>
   <SlideBar v-model="number" :min="0" :max="99" class="slider" />
   <ShapeOptions/>
-  <ColourPicker/>
   </div>
-  
+  <!-- <div id = "colors"><ColourPicker/></div> -->
 </template>
 
 <script>
 import ShapeOptions from './ShapeOptions.vue'
 import SlideBar from './SlideBar.vue'
-import ColourPicker from './ColourPicker.vue';
+// import ColourPicker from './ColourPicker.vue';
 
 export default {
   name: "SideBar",
   components: {
     ShapeOptions,
     SlideBar,
-    ColourPicker
+    // ColourPicker
 },
   data() {
     return {
