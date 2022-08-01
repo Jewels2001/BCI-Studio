@@ -29,10 +29,11 @@ with it for routing purposes the page does not reload -->
     <router-link to="/play">Make ART</router-link>
     <router-link to="/studio">STUDIO</router-link>
     </div>
-    <div class="connection">
-      <ConnectMuse/>
-    </div>
+    <!-- <div class="top-mid"> -->
+        <ConnectMuse/>
+    <!-- </div> -->
     <div class="top-right">
+
       <router-link to="/about">About</router-link>
       <router-link to="/contact">Contact</router-link>
     </div>
@@ -41,6 +42,7 @@ with it for routing purposes the page does not reload -->
 
 <style>
 .top {
+  /* height: 50px; */
   background-color: lightblue;
   overflow: hidden;
   display: block;

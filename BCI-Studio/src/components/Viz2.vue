@@ -77,7 +77,7 @@ export default {
             this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
             this.particlesArray.forEach((particle) => {
-              particle.rotateSpeed = this.avg_activity;
+              particle.rotateSpeed = (this.avg_activity / 1000);
               particle.rotate()
             });
         },

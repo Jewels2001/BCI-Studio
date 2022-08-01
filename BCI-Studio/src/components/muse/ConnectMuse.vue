@@ -114,7 +114,7 @@ export default {
 
             fetch("http://localhost:8080/upload", {
                 method: "POST",
-                headers: {'Content-Type': 'application/json'}, 
+                headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(histObj)
             }).then(res => {
                 console.log("Request complete! response:", res);
@@ -200,31 +200,76 @@ export default {
 </script>
 
 <template>
+
+    <!-- <h3>{{this.connected ? "Connected!" : "Not Connected :("}}</h3> -->
+    <h3>{{this.connected ? "Connected!" : "Not Connected :("}}</h3>
+
     <div class="buttons">
-        <span>
-            <h3>{{this.connected ? "Connected!" : "Not Connected :("}}</h3>
-            <button @click="connect">Connect Muse</button>
-            <button v-if="this.connected" @click="toggleRecord">{{this.recording ? "Stop Recording" : "Record"}}</button>
-            <button v-if="this.connected && this.recorded" :disabled="this.recording" @click="exportRecording">Export Recording</button>
-            <button @click="testREST">Test API Connection</button>
-            <button @click="testFiles">Test GET Filenames</button>
-            <div id="dropdown">
-                <select v-model="this.selectedFile">
-                    <option disabled value=null>Please Select</option>
-                    <option v-for="file in this.files" :value="file">{{file}}</option>
-                </select>
-                <button :disabled="this.selectedFile == null" @click="this.getFileFromName(this.selectedFile)">Load</button>
-                <button :disabled="this.loadedFile == null" @click="this.playFile">Play</button>
-            </div>
-        </span>
+            <button @click="connect">Connect Muse</button><!-- <button @click="testREST">Test API Connection</button>
+            <button @click="testFiles">Test GET Filenames</button> -->
     </div>
+    <div class="buttons">
+      <button v-if="this.connected" @click="toggleRecord">{{this.recording ? "Stop Recording" : "Record"}}</button>
+      <button v-if="this.connected && this.recorded" :disabled="this.recording" @click="exportRecording">Export Recording</button>
+
+    </div>
+    <div class="buttons" id="dropdown">
+        <select v-model="this.selectedFile">
+            <option disabled value=null>Please Select</option>
+            <option v-for="file in this.files" :value="file">{{file}}</option>
+        </select>
+        <div class="buttons2">
+          <button :disabled="this.selectedFile == null" @click="this.getFileFromName(this.selectedFile)">Load</button>
+          <button :disabled="this.loadedFile == null" @click="this.playFile">Play</button>
+        </div>
+    </div>
+
 </template>
 
 <style>
 
+h3 {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  text-decoration: none;
+  font-family: 'HustleBright';
+  font-size: 14px;
+  padding: 14px 16px;
+}
+
+button {
+  width: 80px;
+  float: left;
+  /* display: inline-block; */
+  outline: none;
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 12px 24px;
+  border: 0;
+  color: #000021;
+  background: #1de9b6;
+  /* line-height: 1.15; */
+  font-family: 'HustleBright';
+  font-size: 14px;
+  text-align: center;
+  padding: 1px 1px 1px 1px;
+  :hover {
+      transition: all .1s ease;
+      box-shadow: 0 0 0 0 #fff, 0 0 0 3px #1de9b6;
+  }
+}
+
+
+
 .buttons {
-    display: inline;
-    padding: 10px;
+    float: left;
+    /* padding: 10px; */
+}
+
+.buttons-right {
+  float: left;
+  width: 100px;
 }
 
 </style>

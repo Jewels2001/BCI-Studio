@@ -42,6 +42,7 @@ export default {
   position: absolute;
   display: inline-flex;
   flex-direction: row;
+  overflow-y: scroll;
 }
 
 .main {
