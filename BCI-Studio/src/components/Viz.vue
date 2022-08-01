@@ -7,7 +7,6 @@
 
 var W = 400;
 var H = 200;
-console.log(window.height);
 
 var colors = ['orange', 'blue', 'green', 'red', 'purple'];
 var balls = [];
@@ -21,7 +20,6 @@ for(let i=0; i<25; i++) {
     radius: 5,
     color: colors[Math.floor(Math.random() * 5)],
   };
-  console.log(balls[i].color)
 }
 
 // var ball = {
