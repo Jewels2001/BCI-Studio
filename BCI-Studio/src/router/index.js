@@ -5,6 +5,7 @@ import PlayView from '../views/PlayView.vue'
 import StudioView from '../views/StudioView.vue'
 import AboutView from '../views/AboutView.vue'
 import ContactView from '../views/ContactView.vue'
+import DevView from '../views/DevView.vue'
 import NotFound from '../views/NotFound.vue'
 
 const routes = [
@@ -37,6 +38,11 @@ const routes = [
     path: '/contact',
     name: 'contact',
     component: ContactView
+  },
+  {
+    path: '/dev',
+    name: 'dev',
+    component: DevView
   },
   {
     path: '/:pathMatch(.*)',

@@ -36,11 +36,11 @@ export default {
     background-color: beige;
     height: 100%;
     width: 300px;
-    position: relative;
-    clear: both;
-    float: right;
-    right: 0px;
-    top: 0px;
+    /* position: relative;
+    clear: both; */
+    /* float: right; */
+    /* right: 0px;
+    top: 0px; */
     border-left: 5px solid #d2b48c;
     /* align-items: center; */
     /* opacity: 50%; */

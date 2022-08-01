@@ -1,18 +1,18 @@
 <template>
     <div class="shapes">
-    <div id ="square">
-        <label class="SquareSwitch">
-        <input type="checkbox">
-        <span class="slider round"></span>
-    </label>
-    </div>
+      <div id ="square">
+          <label class="SquareSwitch">
+          <input type="checkbox">
+          <span class="slider round"></span>
+      </label>
+      </div>
 
-    <div id="circle">
-        <label class="CircleSwitch">
-        <input type="checkbox">
-        <span class="slider round"></span>
-    </label>
-    </div>
+      <div id="circle">
+          <label class="CircleSwitch">
+          <input type="checkbox">
+          <span class="slider round"></span>
+      </label>
+      </div>
 
     </div>
 
@@ -33,6 +33,7 @@ export default {
   background: #e8a87c;
   float: right;
   margin: 25px;
+  display: inline-block;
 }
 #circle {
   width: 100px;
@@ -40,6 +41,7 @@ export default {
   background: #e8a87c;
   border-radius: 50%;
   float: right;
+  display: inline-block;
   margin: 25px 20px;
 }
 

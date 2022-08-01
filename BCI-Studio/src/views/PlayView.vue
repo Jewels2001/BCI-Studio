@@ -1,10 +1,15 @@
 <template>
+  <div class="container">
     <div class="main">
-      <p> Hi </p>
+      <Viz/>
+
+      <!-- <canvas id="test1" class="test">
+      </canvas> -->
     </div>
     <div class="side">
       <SideBar/>
     </div>
+  </div>
 </template>
 
 <script>
@@ -14,6 +19,7 @@ import Viz from '../components/Viz.vue'
 export default {
   name: 'App',
   components: {
+    Viz,
     SideBar
   }
 }
@@ -21,17 +27,41 @@ export default {
 
 <style>
 
+.container {
+  height: 95%;
+  margin: 0 0 0 0;
+}
+
 .side {
   height: 100%;
-  width: 50%;
+  width: 300px;
+  right: 0px;
   float: right;
+  position: absolute;
+  display: inline-flex;
+  flex-direction: row;
 }
 
 .main {
-  width: 50%;
+  height: 100%;
+  max-width: 100%;
+  padding-top: 5px;
+  left: 0px;
   float: left;
-  margin-top: 5px;
+  margin-right:300px;
+  display: inline-flex;
+  flex-direction: row;
 }
 
+/* .test {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+} */
+
+canvas {
+  height: 100%;
+  width: 100%;
+}
 
 </style>
