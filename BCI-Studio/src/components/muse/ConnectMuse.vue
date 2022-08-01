@@ -202,15 +202,15 @@ export default {
 <template>
 
     <!-- <h3>{{this.connected ? "Connected!" : "Not Connected :("}}</h3> -->
-    <h3>{{this.connected ? "Connected!" : "Not Connected :("}}</h3>
+    <h3 class="muse-h3">{{this.connected ? "Connected!" : "Not Connected :("}}</h3>
 
     <div class="buttons">
-            <button @click="connect">Connect Muse</button><!-- <button @click="testREST">Test API Connection</button>
+            <button class="muse-button" @click="connect">Connect Muse</button><!-- <button @click="testREST">Test API Connection</button>
             <button @click="testFiles">Test GET Filenames</button> -->
     </div>
     <div class="buttons">
-      <button v-if="this.connected" @click="toggleRecord">{{this.recording ? "Stop Recording" : "Record"}}</button>
-      <button v-if="this.connected && this.recorded" :disabled="this.recording" @click="exportRecording">Export Recording</button>
+      <button class="muse-button" v-if="this.connected" @click="toggleRecord">{{this.recording ? "Stop Recording" : "Record"}}</button>
+      <button class="muse-button" v-if="this.connected && this.recorded" :disabled="this.recording" @click="exportRecording">Export Recording</button>
 
     </div>
     <div class="buttons" id="dropdown">
@@ -219,8 +219,8 @@ export default {
             <option v-for="file in this.files" :value="file">{{file}}</option>
         </select>
         <div class="buttons2">
-          <button :disabled="this.selectedFile == null" @click="this.getFileFromName(this.selectedFile)">Load</button>
-          <button :disabled="this.loadedFile == null" @click="this.playFile">Play</button>
+          <button class="muse-button" :disabled="this.selectedFile == null" @click="this.getFileFromName(this.selectedFile)">Load</button>
+          <button class="muse-button" :disabled="this.loadedFile == null" @click="this.playFile">Play</button>
         </div>
     </div>
 
@@ -228,7 +228,7 @@ export default {
 
 <style>
 
-h3 {
+.muse-h3 {
   float: left;
   color: #f2f2f2;
   text-align: center;
@@ -238,7 +238,7 @@ h3 {
   padding: 14px 16px;
 }
 
-button {
+.muse-button {
   width: 80px;
   float: left;
   /* display: inline-block; */
@@ -254,10 +254,9 @@ button {
   font-size: 14px;
   text-align: center;
   padding: 1px 1px 1px 1px;
-  :hover {
-      transition: all .1s ease;
-      box-shadow: 0 0 0 0 #fff, 0 0 0 3px #1de9b6;
-  }
+}
+.muse-button:disabled {
+  background: #eeeeee
 }
 
 

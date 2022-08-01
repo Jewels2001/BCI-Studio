@@ -61,7 +61,7 @@ export default {
 
 #sidebar {
     background-color: beige;
-    height: 100%;
+    height: 150%;
     width: 300px;
     position: absolute;
     /* clear: both;  */
@@ -72,7 +72,7 @@ export default {
     /* align-items: center; */
     /* opacity: 50%; */
 }
-h1 { 
+h1 {
   font-weight: lighter;
   font-family: "Vanitas";
   font-size: 80px;

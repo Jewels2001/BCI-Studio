@@ -43,12 +43,13 @@ export default {
   display: inline-flex;
   flex-direction: row;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .main {
   height: 100%;
   max-width: 100%;
-  padding-top: 5px;
+  /* padding-top: 5px; */
   left: 0px;
   float: left;
   margin-right:300px;

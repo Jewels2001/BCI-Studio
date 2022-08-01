@@ -42,7 +42,7 @@ with it for routing purposes the page does not reload -->
 
 <style>
 .top {
-  /* height: 50px; */
+  height: 50px;
   background-color: lightblue;
   overflow: hidden;
   display: block;
