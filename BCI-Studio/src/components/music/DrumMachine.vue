@@ -56,7 +56,7 @@ export default {
 
 <template>
     <div>
-        <h2>DRUMS</h2>
+        <h2>DRUM</h2>
         <div>
             <label class="CircleSwitch">
                 <input type="checkbox" @change="this.playing = !this.playing">
@@ -70,10 +70,11 @@ export default {
 
 .CircleSwitch {
     position: relative;
-    display: inline-block;
+    /* display: inline-block; */
     width: 60px;
     height: 34px;
-    margin-top: 116px;
+    float: right;
+    /* margin-top: 116px; */
   
 }
     

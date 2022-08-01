@@ -121,17 +121,49 @@ export default {
     </div>
 </template>
 
-<style>
-
+<style scoped>
+h1{
+    color: #41b3a3;
+    letter-spacing: 5px;
+}
+button {
+  padding: 0.8rem 2.5rem;
+  background: transparent;
+  text-align: center;
+  font-size: 20px;
+  font-family: "Bodoni Moda";
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 1px solid #e27d60;
+  color: rgb(31, 31, 31);
+  font-weight: bold;
+  letter-spacing: 1px;
+  position:relative;
+}
+button:hover {
+  background-color: #c38d9e;
+}
+button:active {
+  background-color: #c38d9e;
+  transform: translateY(2px);
+}
 .music-components {
-    display: flex;    
+  width: 290px;
+  margin: 10px;
+  float: center;
+  text-align: left;
 }
 
 .instrument {
-    padding: 5%;
-    margin-left: 10px;
-    text-align: center;
-    background-color: rgb(73, 73, 73);
+    letter-spacing: 5px;
+    float: left;
+    font-weight: lighter;
+    font-size: 13px;
+    text-align: left;
+    padding: 10px;
+    right: 5px;
+    color: #e27d60;
+    /* background-color: #41b3a3; */
 }
 
 </style>

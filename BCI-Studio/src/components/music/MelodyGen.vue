@@ -76,13 +76,15 @@ export default {
 </template>
 
 <style>
-
+h2{
+    margin-right: 5px;
+}
 .CircleSwitch {
     position: relative;
     display: inline-block;
     width: 60px;
     height: 34px;
-    margin-top: 116px;
+    /* margin-top: 116px; */
   
 }
     
@@ -139,4 +141,10 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
+</style>
+
+<style scoped>
+h2{
+    margin-right: 40px;
+}
 </style>

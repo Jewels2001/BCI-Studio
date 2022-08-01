@@ -43,7 +43,7 @@ export default {
 
 </template>
 
-<style>
+<style scoped>
 .box-option {
   height: 50px;
   font-family: "Bodoni Moda";

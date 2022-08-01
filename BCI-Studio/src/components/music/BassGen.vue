@@ -65,12 +65,11 @@ export default {
 <style>
 
 .CircleSwitch {
-    position: relative;
-    display: inline-block;
+    /* position: relative; */
     width: 60px;
     height: 34px;
-    margin-top: 116px;
-  
+    margin: 0;
+    float: right;
 }
     
 .CircleSwitch input {
@@ -81,7 +80,7 @@ export default {
 
 /* slider */
 .slider {
-  position: absolute;
+  /* position: absolute; */
   cursor: pointer;
   top: 0;
   left: 0;
@@ -93,7 +92,7 @@ export default {
 }
 
 .slider:before {
-  position: absolute;
+  /* position: absolute; */
   content: "";
   height: 26px;
   width: 26px;
@@ -105,11 +104,11 @@ export default {
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: #c38d9e;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px #c38d9e;
 }
 
 input:checked + .slider:before {
