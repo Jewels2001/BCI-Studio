@@ -53,7 +53,7 @@ export default {
                 kickSynth.triggerAttackRelease("C1", "8n", time, 1)
             }
             if(this.counter % 4 != 1) {
-                hatSynth.triggerAttackRelease("C4", "32n", time, 0.3)
+                hatSynth.triggerAttackRelease("C4", "32n", time, 0.2)
             }
 
             this.counter = (this.counter + 1) % 16
