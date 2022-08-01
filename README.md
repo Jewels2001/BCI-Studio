@@ -31,7 +31,7 @@ A web-app built using Vue.js for generative artistic creation involving music an
 *For production environment*
 `npm run build`
 
-# Tools/Resources/Libraries Used:
+# Tools/Resources/Libraries:
 - Vue3 in Vite  (JavaScript Framework)
 - Go backend
 - HTML5 Canvas
