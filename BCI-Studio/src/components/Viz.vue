@@ -7,11 +7,12 @@
 
 var W = 400;
 var H = 200;
+console.log(window.height);
 
-var colors = ['orange', 'blue', 'green', 'teal', 'purple'];
+var colors = ['orange', 'blue', 'green', 'red', 'purple'];
 var balls = [];
 
-for(let i=0; i<50; i++) {
+for(let i=0; i<25; i++) {
   balls[i] = {
     x: Math.floor(Math.random() * 500),
     y: Math.floor(Math.random() * 500),
@@ -20,6 +21,7 @@ for(let i=0; i<50; i++) {
     radius: 5,
     color: colors[Math.floor(Math.random() * 5)],
   };
+  console.log(balls[i].color)
 }
 
 // var ball = {
@@ -52,6 +54,8 @@ for(let i=0; i<50; i++) {
 export default {
   props: {
     drawInterval: { default: 3000, type: Number },
+    circleBool: false,
+    squareBool: false,
   },
   data() {
     return {
@@ -63,6 +67,8 @@ export default {
     var canvas = document.getElementById('c1');
     var ctx = canvas.getContext('2d');
     this.c = ctx;
+    console.log(canvas.height);
+    console.log(canvas.width);
     canvas.width = W;
     canvas.height = H;
     this.startDrawing();
@@ -76,7 +82,8 @@ export default {
       this.c.fill();
     },
     moveBall(ball) {
-      this.c.fillStyle = 'rgba(255,255,255, 0.15)';
+      this.c.fillStyle = 'rgba(255,255,255, 0.01)';
+      // console.log(this.c.fillStyle);
       this.c.fillRect(0, 0, W, H);
       this.drawBall(ball);
       ball.x += ball.vx;
@@ -95,7 +102,7 @@ export default {
       let self = this;
       this.intervalId1 = setInterval(
         function () {
-          console.log(balls.length);
+          // console.log(balls.length);
           for(let i=0; i<balls.length; i++) {
             self.moveBall(balls[i]);
           }
@@ -107,14 +114,14 @@ export default {
 </script>
 
 <template>
-  <canvas id="c1"></canvas>
+  <canvas id="c1" class="c1"></canvas>
 </template>
 
 <style>
-#c1 {
-  border: 1px solid grey;
+.c1 {
+  /* border: 1px solid grey; */
   /*Fill canvas with black by default*/
-  background: #000;
+  background-color: #fff;
   /*  #fa0 is orange  */
 }
 </style>
