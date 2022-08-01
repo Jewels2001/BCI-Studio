@@ -2,6 +2,7 @@
 import DrumMachine from './DrumMachine.vue'
 import HarmonyGen from './HarmonyGen.vue'
 import MelodyGen from './MelodyGen.vue'
+import BassGen from './BassGen.vue'
 
 import * as Tone from 'tone'
 
@@ -40,12 +41,13 @@ export default {
             this.$refs.drumMachine.loop(time)
             this.$refs.harmonyGen.loop(time)
             this.$refs.melodyGen.loop(time)
+            this.$refs.bassGen.loop(time)
         },
     },
     async beforeMount() {
         await Tone.start()
     },
-    components: { HarmonyGen, DrumMachine, MelodyGen},
+    components: { HarmonyGen, DrumMachine, MelodyGen, BassGen },
 }
 </script>
 
@@ -71,6 +73,11 @@ export default {
                 :keyT="this.key"
                 :chord="this.chord"
             />
+            <BassGen
+                class="instrument"
+                ref="bassGen"
+                :chord="this.chord"
+            />
         </div>
     </div>
 </template>
@@ -78,11 +85,14 @@ export default {
 <style>
 
 .music-components {
-    display: flex;
+    display: flex;    
 }
 
 .instrument {
     padding: 5%;
+    margin-left: 10px;
+    text-align: center;
+    background-color: rgb(73, 73, 73);
 }
 
 </style>

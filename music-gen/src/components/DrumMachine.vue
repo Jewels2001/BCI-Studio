@@ -46,7 +46,7 @@ export default {
 
 <template>
     <div>
-        <h2>DRUM MACHINE</h2>
+        <h2>DRUMS</h2>
         <div>
             <label class="CircleSwitch">
                 <input type="checkbox" @change="this.playing = !this.playing">
