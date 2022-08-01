@@ -1,4 +1,4 @@
-# nathacks
+# natHACKS 2022 Project Submission
 
 # Project Name:
 BCI Studio
@@ -12,9 +12,18 @@ Team of undergraduate students from the University of Lethbridge
 
 
 # How to run:
-Go to BCI-Studio directory
+*Requirements*
+ - Muse S Brain-Computer Interface hardware
+ - Google Chrome or another Bluetooth-compatible web browser
 
-`npm install`
+*Backend*
+Go to backend directory
+run `go install`
+run `go run server.go`
+
+*Frontend*
+Go to BCI-Studio directory
+run `npm install`
 
 *For dev environment*
 `npm run dev`
