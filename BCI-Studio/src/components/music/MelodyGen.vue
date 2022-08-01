@@ -1,5 +1,6 @@
 <script>
 import * as Tone from 'tone'
+import {rand, chance, numToNote} from '../util/music.js'
 
 var melodySynth
 
@@ -9,7 +10,7 @@ export default {
             playing: false,
             counter: 0,
             melody_note: 0,
-            melody_note_chance: 50,
+            melody_note_chance: 20,
             key_copy: this.keyT,
             chord_copy: this.chord,
         }
@@ -33,9 +34,9 @@ export default {
         },
     },
     methods: {
-        loop(time) {
+        loop(time, avg_activity) {
             if(this.counter % 2 == 0) {
-                if(chance(this.melody_note_chance)) {
+                if(chance(this.melody_note_chance) || avg_activity > 60) {
                     this.genMelodyNote()
                     if(this.playing) {
                         console.log("Melody", this.melody_note, numToNote(this.melody_note))
@@ -58,47 +59,6 @@ export default {
         melodySynth = new Tone.MonoSynth().toDestination()
         this.counter = 0
     }
-}
-
-function rand(max) {
-    return Math.floor(Math.random() * max)
-}
-
-function chance(pct) {
-    return rand(100) <= pct
-}
-
-function numToNote(num) {
-    let note = ""
-    if(num % 12 == 0) {
-        note = "C"
-    } else if(num % 12 == 1) {
-        note = 'C#'
-    } else if(num % 12 == 2) {
-        note = 'D'
-    } else if(num % 12 == 3) {
-        note = 'D#'
-    } else if(num % 12 == 4) {
-        note = 'E'
-    } else if(num % 12 == 5) {
-        note = 'F'
-    } else if(num % 12 == 6) {
-        note = 'F#'
-    } else if(num % 12 == 7) {
-        note = 'G'
-    } else if(num % 12 == 8) {
-        note = 'G#'
-    } else if(num % 12 == 9) {
-        note = 'A'
-    } else if(num % 12 == 10) {
-        note = 'A#'
-    } else if(num % 12 == 11) {
-        note = 'B'
-    }
-
-    let octave = Math.floor(num / 12) - 1
-
-    return note + octave
 }
 </script>
 

@@ -1,5 +1,6 @@
 <script>
 import * as Tone from 'tone'
+import {rand, chance, numToNote} from '../util/music.js'
 
 var kickSynth
 var hatSynth
@@ -13,12 +14,21 @@ export default {
         }
     },
     methods: {
-        loop(time) {
+        loop(time, avg_activity) {
             if(this.playing) {
                 if(this.counter % 4 == 0) {
                     kickSynth.triggerAttackRelease("C1", "8n", time, 1)
                 }
-                if(this.counter % 4 != 1) {
+                if(this.counter % 4 == 3 && avg_activity > 60) {
+                    kickSynth.triggerAttackRelease("C3", "8n", time, 0.5)
+                }
+                if((this.counter == 5 || this.counter == 10) && avg_activity > 80) {
+                    kickSynth.triggerAttackRelease("C4", "8n", time, 0.5)
+                }
+                if((this.counter == 7 || this.counter == 9) && avg_activity > 100) {
+                    kickSynth.triggerAttackRelease("F5", "8n", time, 0.5)
+                }
+                if((this.counter % 4 != 1) && avg_activity > 40) {
                     hatSynth.triggerAttackRelease("C4", "32n", time, 0.2)
                 }
             }

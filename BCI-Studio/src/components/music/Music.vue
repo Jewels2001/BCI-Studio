@@ -4,6 +4,8 @@ import HarmonyGen from './HarmonyGen.vue'
 import MelodyGen from './MelodyGen.vue'
 import BassGen from './BassGen.vue'
 
+import Queue from '../util/queue.js'
+
 import * as Tone from 'tone'
 
 export default {
@@ -14,6 +16,8 @@ export default {
             key: [],
             cur_tempo: 100,
             loop: null,
+            avg_hist: new Queue(),
+            avg_activity: 0
         };
     },
     methods: {
@@ -40,9 +44,42 @@ export default {
         },
 
         triggerComponents(time) {
-            this.$refs.drumMachine.loop(time)
+            if(this.avg_hist.length == 20) {
+                this.avg_hist.pop()
+            }
+
+            let data = this.$store.getters.getData
+            let sum = 0
+            for(let i=0; i<5; i++) {
+                sum += data.ch0.data[i]
+            }
+            for(let i=0; i<5; i++) {
+                sum += data.ch1.data[i]
+            }
+            for(let i=0; i<5; i++) {
+                sum += data.ch2.data[i]
+            }
+            for(let i=0; i<5; i++) {
+                sum += data.ch3.data[i]
+            }
+            sum /= 20
+            this.avg_hist.push(sum)
+
+            if(this.avg_hist.length == 20) {
+                sum = 0
+                for(let i = this.avg_hist.head; i<this.avg_hist.head+20; i++) {
+                    sum += this.avg_hist.elements[i]
+                }
+                sum /= 20
+                this.avg_activity = sum
+            }
+
+            // console.log("AVG Activity", this.avg_activity)
+            // console.log("AVG Hist", this.avg_hist.elements)
+
+            this.$refs.drumMachine.loop(time, this.avg_activity)
             this.$refs.harmonyGen.loop(time)
-            this.$refs.melodyGen.loop(time)
+            this.$refs.melodyGen.loop(time, this.avg_activity)
             this.$refs.bassGen.loop(time)
         },
     },
