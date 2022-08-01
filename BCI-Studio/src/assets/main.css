@@ -29,7 +29,6 @@ html, body {
   height: 100%;
   max-height: 1080px;
   max-width: 1920px;
-  overflow-y: hidden;
   text-align: center;
   font-family:'HustleBright', 'Bodoni+Moda', 'Verdana', sans-serif;
   font-size: 15px;

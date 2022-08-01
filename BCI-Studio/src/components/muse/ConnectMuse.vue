@@ -256,7 +256,8 @@ export default {
   padding: 1px 1px 1px 1px;
 }
 .muse-button:disabled {
-  background: #eeeeee
+  background: #eeeeee;
+  cursor: default;
 }
 
 
