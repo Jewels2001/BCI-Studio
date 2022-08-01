@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="main">
-      <Viz/>
+      <Viz />
 
       <!-- <canvas id="test1" class="test">
       </canvas> -->

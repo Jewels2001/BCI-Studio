@@ -2,10 +2,17 @@
 <template>
   <div id="sidebar">
     <h1>Options</h1>
-  <span> Size: {{ number }} </span>
-  <SlideBar v-model="number" :min="0" :max="99" class="slider" />
-  <ShapeOptions/>
-  <ColourPicker/>
+    <span> Size: {{ number }} </span>
+    <!-- <SlideBar v-model="number" :min="0" :max="99" class="slider" /> -->
+    <div class="option-box">
+      <ShapeOptions/>
+    </div>
+    <!-- <button @click:></button> -->
+    <!-- <ColourPicker/> -->
+    <div class="option-box">
+      <BrainPicker :options="opts"/>
+
+    </div>
   </div>
 
 </template>
@@ -14,17 +21,25 @@
 import ShapeOptions from './ShapeOptions.vue'
 import SlideBar from './SlideBar.vue'
 import ColourPicker from './ColourPicker.vue';
+import BrainPicker from './BrainPicker.vue';
 
 export default {
   name: "SideBar",
   components: {
     ShapeOptions,
     SlideBar,
-    ColourPicker
+    ColourPicker,
+    BrainPicker,
 },
   data() {
     return {
       number: 0,
+      opts: [
+      { name: "Color", value: 0 },
+      { name: "Speed", value: 1 },
+      { name: "Shape", value: 2 },
+      { name: "Size", value: 3 }
+      ]
     };
   },
 };
@@ -32,6 +47,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+.option-box {
+  height: 250px;
+}
+
 #sidebar {
     background-color: beige;
     height: 100%;
