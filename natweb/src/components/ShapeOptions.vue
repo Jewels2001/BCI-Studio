@@ -30,14 +30,14 @@ export default {
 #square {
   width: 100px;
   height: 100px;
-  background: white;
+  background: #e8a87c;
   float: right;
   margin: 25px;
 }
 #circle {
   width: 100px;
   height: 100px;
-  background: white;
+  background: #e8a87c;
   border-radius: 50%;
   float: right;
   margin: 25px 20px;
@@ -100,11 +100,11 @@ export default {
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: #c38d9e;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px #c38d9e;
 }
 
 input:checked + .slider:before {

@@ -33,14 +33,27 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 #sidebar {
-    background-color: rgb(0, 0, 0);
+    background-color: beige;
     height: 100%;
     width: 300px;
     position: fixed;
     right: 0px;
     top: 0px;
+    border-left: 5px solid #d2b48c;
     /* align-items: center; */
     /* opacity: 50%; */
+}
+h1 {
+  font-weight: lighter;
+  font-family: "Vanitas";
+  font-size: 80px;
+  color: #41b3a3;
+  margin: 10px;
+}
+span {
+  font-family: "Bodoni Moda";
+  font-size: 30px;
+  color: #d2b48c
 }
 
 </style>
