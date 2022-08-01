@@ -43,7 +43,7 @@ export default {
                 this.genVoicing()
 
                 if(this.playing) {
-                    // console.log([numToNote(this.voicing[0]), numToNote(this.voicing[1]), numToNote(this.voicing[2])])
+                    console.log([numToNote(this.voicing[0]), numToNote(this.voicing[1]), numToNote(this.voicing[2])])
                     harmonySynth.triggerAttackRelease([numToNote(this.voicing[0]), numToNote(this.voicing[1]), numToNote(this.voicing[2])], "1n", time, 0.8)
                 }
             }
@@ -60,7 +60,7 @@ export default {
             else {
                 i = ((i + (rand(5)-3)) + 12) % 12
             }
-            // console.log("KEY", i)
+            console.log("KEY", i)
             this.key = KEYS[i]
             this.cur_key = i
             this.$emit('changeKey', this.key)
@@ -86,7 +86,7 @@ export default {
             }
 
             this.voicing.sort()
-            // console.log("Voicing", this.voicing)
+            console.log("Voicing", this.voicing)
         },
     },
     beforeMount() {

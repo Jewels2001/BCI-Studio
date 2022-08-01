@@ -1,13 +1,11 @@
 <script setup>
 import ConnectMuse from './components/ConnectMuse.vue'
-import MusicGen from './components/MusicGen.vue';
-import DrumMachine from './components/DrumMachine.vue'
+import Music from './components/Music.vue';
 </script>
 
 <template>
-  <ConnectMuse></ConnectMuse>
-  <MusicGen></MusicGen>
-  <DrumMachine></DrumMachine>
+  <ConnectMuse/>
+  <Music/>
 </template>
 
 <style scoped>

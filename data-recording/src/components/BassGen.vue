@@ -1,30 +1,22 @@
 <script>
 import * as Tone from 'tone'
 
-var melodySynth
+var bassSynth
 
 export default {
     data() {
         return {
             playing: false,
             counter: 0,
-            melody_note: 0,
-            melody_note_chance: 50,
-            key_copy: this.keyT,
+            bass_note: 0,
+            bass_note_chance: 25,
             chord_copy: this.chord,
         }
     },
     props: {
-        keyT: Array,
         chord: Array,
     },
     watch: {
-        keyT: {
-            handler(newKey, oldKey) {
-                this.key_copy = newKey
-            },
-            deep: true
-        },
         chord: {
             handler(newChord, oldChord) {
                 this.chord_copy = newChord
@@ -34,28 +26,24 @@ export default {
     },
     methods: {
         loop(time) {
-            if(this.counter % 2 == 0) {
-                if(chance(this.melody_note_chance)) {
-                    this.genMelodyNote()
+            if(this.counter % 4 == 0) {
+                if(this.counter == 0) {
                     if(this.playing) {
-                        // console.log("Melody", this.melody_note, numToNote(this.melody_note))
-                        melodySynth.triggerAttackRelease(numToNote(this.melody_note), "8n", time)
+                        this.bass_note = this.chord_copy[0] + 36
+                        bassSynth.triggerAttackRelease(numToNote(this.bass_note), "8n", time, 0.8)
+                    }
+                } else if(chance(this.bass_note_chance)) {
+                    if(this.playing) {
+                        this.bass_note = this.chord_copy[2] + 36
+                        bassSynth.triggerAttackRelease(numToNote(this.bass_note), "8n", time, 0.8)
                     }
                 }
             }
             this.counter = (this.counter + 1) % 16
         },
-
-        genMelodyNote() {
-            let offset = rand(4) * 2
-            this.melody_note = this.key_copy[(this.key_copy.indexOf(this.chord_copy[0]) + offset) % 7] + 72
-            if(this.melody_note > 84) {
-                this.melody_note -= 12
-            }
-        },
     },
     beforeMount() {
-        melodySynth = new Tone.MonoSynth().toDestination()
+        bassSynth = new Tone.MonoSynth().toDestination()
         this.counter = 0
     }
 }
@@ -104,7 +92,7 @@ function numToNote(num) {
 
 <template>
     <div>
-        <h2>MELODY</h2>
+        <h2>BASS</h2>
         <div>
             <label class="CircleSwitch">
                 <input type="checkbox" @change="this.playing = !this.playing">

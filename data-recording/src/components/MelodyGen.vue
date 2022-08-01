@@ -38,7 +38,7 @@ export default {
                 if(chance(this.melody_note_chance)) {
                     this.genMelodyNote()
                     if(this.playing) {
-                        // console.log("Melody", this.melody_note, numToNote(this.melody_note))
+                        console.log("Melody", this.melody_note, numToNote(this.melody_note))
                         melodySynth.triggerAttackRelease(numToNote(this.melody_note), "8n", time)
                     }
                 }
